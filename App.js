@@ -1,55 +1,53 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// App.js
+import React from "react";
+import "./App.css";
+import {  Route,Routes } from 'react-router';
 import { BrowserRouter } from "react-router-dom";
+import BookDetails from "./BookDetails";
+import Home from "./Home";
+import SignupForm from "./SignupForm";
+import LoginForm from './LoginForm'
+import Favorites from "./Favorites";
+import AppContextProvider from "./appContext";
+import MostLiked from "./MostLiked";
+import Logout from "./Logout";
+import NotFound from "./Notfound";
+import UpdateProfileForm from "./UpdateProfile";
 
-import RouteList from "./RouteList";
-import NavBar from "./NavBar";
 
-/**
- * App
- *
- * state:
-  * dogs: [{name...}]
-  * isLoading: bool
- *
- * props: none
- *
- * App -> RouteList
- *
- */
-
-function App() {
-  const [dogs, setDogs] = useState({
-    data: null,
-    isLoading: true
-  });
-
-  useEffect(() => {
-    async function loadDogs(){
-      const response = await axios.get("http://localhost:5001/dogs")
-      setDogs({
-        data: response.data,
-        isLoading: false
-      })
-    }
-    loadDogs()
-  }, [])
-
-  if (dogs.isLoading) {
-    return <h1>Loading...</h1>
-  }
+const App = () => {
 
   return (
-    <div>
-      <h1>Welcome!</h1>
-      <BrowserRouter>
-        <NavBar dogs={dogs.data} />
-        <div className="container">
-          <RouteList dogs={dogs.data} />
-        </div>
-      </BrowserRouter>
+    <div className="App">
+
+        <BrowserRouter>
+        <Routes>
+        <Route exact path = "/bookdetails/:id" element={<BookDetails/>} />
+    
+
+        <Route exact path = "/" element={<Home/>} />
+
+        <Route exact path = "/signup" element={<SignupForm/>} />
+
+
+        <Route exact path = "/login" element={<LoginForm/>} />
+
+
+        <Route exact path = "/favorites" element={<Favorites/>} />
+
+
+        <Route exact path = "/likedbooks" element={<MostLiked/>} />
+
+
+        <Route exact path = "/logout" element={<Logout/>} />
+
+        <Route exact path = "/Profile" element={<UpdateProfileForm/>} />
+
+        <Route exact path = "*" element={<NotFound/>} />
+        </Routes>
+        </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

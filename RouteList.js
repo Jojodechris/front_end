@@ -1,31 +1,39 @@
+// RouteList.js
+
 import {
-  Routes,
-  Route,
-  Navigate
-} from 'react-router-dom';
-import DogList from './DogList';
-import FilterDogDetails from './FilterDogDetails';
+    Routes,
+    Route,
+    Navigate
+  } from 'react-router-dom';
+  import BookDetails from './BookDetails';
+  import Home from './Home';
 
-function RouteList({dogs}) {
-  return (
-    <Routes>
-      <Route
-        path="/dogs"
-        element={<DogList dogs={dogs} />}
-      />
+  
+  function RouteList() {
 
-      <Route
-        path="/dogs/:name"
-        element={<FilterDogDetails dogs={dogs} />}
-      />
+    return (
+      <Routes>
+        <Route
+          path="/"
+          element={<Home/>}
+        />
+  
+        {/* <Route
+          path="/:id"
+          element={<BookDetails/>} /> */}
 
-      <Route
-        path="/*"
-        element={<Navigate to="/dogs" />}
-      />
-    </Routes>
-  );
-}
-
-export default RouteList;
-
+        {/* <Route
+          path="/profile"
+          element={< Profile profile ={profile} />}
+        />   */}
+        {/* <Route
+          path="/*"
+          element={ <navigate to="/" />}
+        /> */}
+      </Routes>
+    );
+  }
+  
+  export default RouteList;
+  
+  
